@@ -1,5 +1,5 @@
 {
-  "name": "nivel-3-solid",
+  "name": "apl-node-gym-pass",
   "version": "1.0.0",
   "description": "GymPass style app",
   "main": "index.js",
@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "5.15.1",
     "dotenv": "16.4.5",
     "fastify": "4.28.0",
     "zod": "3.23.8"
@@ -20,6 +21,7 @@
     "@rocketseat/eslint-config": "2.2.2",
     "@types/node": "20.14.6",
     "eslint": "8.57.0",
+    "prisma": "5.15.1",
     "tsup": "8.1.0",
     "tsx": "4.15.6",
     "typescript": "5.4.5"
