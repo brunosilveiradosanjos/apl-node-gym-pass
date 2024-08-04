@@ -2,31 +2,31 @@
 
 GymPass style app
 
-## RFs (Requisitos funcionais)
+## FRs (Functional Requirements)
 
-- [x] Deve ser possível se cadastrar
-- [x] Deve ser possível se autenticar
-- [x] Deve ser possível obter o perfil de um usuário logado
-- [x] Deve ser possível obter o número de chack-ins realizados pelo usuário logado
-- [x] Deve ser possível o usuário obter seu histórico de check-ins
-- [x] Deve ser possível o usuário buscar academias próximas (até 10km)
-- [x] Deve ser possível o usuário buscar academias pelo nome
-- [x] Deve ser possível o usuário realizar check-in em uma academia
-- [x] Deve ser possível o validar o check-in de um usuário
-- [x] Deve ser possível cadastrar uma academia
+- [x] It should be possible to register
+- [x] It should be possible to autenticate
+- [x] It should be possible to get a logged user profile
+- [x] It should be possible to get logged users check-ins
+- [x] It should be possible to get users check-ins history
+- [x] It should be possible to search users nearby gyms (up until 10km)
+- [x] It should be possible to search gyms by name
+- [x] It should be possible for the user to check in at a gym
+- [x] It should be possible to validate a user's check-in
+- [x] It should be possible to register a gym
 
-## RNs (Regras de negócio)
+## BRs (Business Rules)
 
-- [x] O usuário não deve poder se cadastrar com um e-mail duplicado
-- [x] O usuário não pode fazer 2 check-ins no mesmo dia
-- [x] O usuário não pode fazer check-in se não estiver perto (100m) da academia
-- [x] O check-in só pode ser validado até 20 minutos após criado
-- [ ] O check-in só pode ser validado por administradores
-- [ ] O check-in só pode ser cadastrada por administradores
+- [x] The user should not be able to register with a duplicate email
+- [x] The user cannot check in twice on the same day
+- [x] The user cannot check in if he/she is not close (100m) to the gym
+- [x] The check-in can only be validated up to 20 minutes after it is created
+- [ ] The check-in can only be validated by administrators
+- [ ] The check-in can only be registered by administrators
 
-## RNFs (Requisitos não-funcionais)
+## NFRs (Non-functional requirements)
 
-- [x] A senha do usuário precisa estar criptografada
-- [x] Os dados da aplicação precisam estar persistidos em um banco PostgreeSQL
-- [x] Todas listas de dados precisam estar paginadas com 20 itens por página
-- [ ] O usuário deve ser identificado por um JWT
+- [x] The user's password must be encrypted
+- [x] The application data must be persisted in a PostgreSQL database
+- [x] All data lists must be paginated with 20 items per page
+- [ ] The user must be identified by a JWT
