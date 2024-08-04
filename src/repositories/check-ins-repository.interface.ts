@@ -1,6 +1,6 @@
 import { CheckIn, Prisma } from '@prisma/client'
 
-export interface CheckInRepository {
+export interface CheckInsRepository {
   create(data: Prisma.CheckInUncheckedCreateInput): Promise<CheckIn>
   findByUserInOnDate(userId: string, date: Date): Promise<CheckIn | null>
   findManyByUserId(userId: string, page: number): Promise<Array<CheckIn> | null>

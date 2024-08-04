@@ -1,9 +1,9 @@
 import { Prisma, CheckIn } from '@prisma/client'
-import { CheckInRepository } from '../check-ins-repository.interface'
+import { CheckInsRepository } from '../check-ins-repository.interface'
 import { prisma } from '@/lib/prisma'
 import dayjs from 'dayjs'
 
-export class PrismaCheckInsRepository implements CheckInRepository {
+export class PrismaCheckInsRepository implements CheckInsRepository {
   async create(data: Prisma.CheckInUncheckedCreateInput) {
     const checkIn = await prisma.checkIn.create({ data })
     return checkIn
@@ -13,10 +13,13 @@ export class PrismaCheckInsRepository implements CheckInRepository {
     const startOfTheDay = dayjs(date).startOf('date')
     const endOfTheDay = dayjs(date).endOf('date')
     const checkIn = await prisma.checkIn.findFirst({
-      where: { user_id: userId, created_at: {
-        gte:startOfTheDay.toDate(),
-        lte:endOfTheDay.toDate()
-      } },
+      where: {
+        user_id: userId,
+        created_at: {
+          gte: startOfTheDay.toDate(),
+          lte: endOfTheDay.toDate(),
+        },
+      },
     })
     return checkIn
   }
