@@ -36,7 +36,7 @@ export class InMemoryGymsRepository implements GymsRepository {
   async fetchManyNearby(params: FetchManyNearby) {
     return this.items.filter((item) => {
       const distance = getDistanceBetweenCoordinates(
-        { latitude: params.userLatitute, longitude: params.userLongitute },
+        { latitude: params.userLatitude, longitude: params.userLatitude },
         {
           latitude: item.latitude.toNumber(),
           longitude: item.longitude.toNumber(),

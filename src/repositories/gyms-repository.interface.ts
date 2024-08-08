@@ -1,8 +1,8 @@
 import { Gym, Prisma } from '@prisma/client'
 
 export interface FetchManyNearby {
-  userLatitute: number
-  userLongitute: number
+  userLatitude: number
+  userLongitude: number
 }
 
 export interface GymsRepository {
