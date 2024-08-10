@@ -1,13 +1,13 @@
 import { Gym, Prisma } from '@prisma/client'
 
-export interface FetchManyNearby {
-  userLatitude: number
-  userLongitude: number
+export interface FindManyNearbyParams {
+  latitude: number
+  longitude: number
 }
 
 export interface GymsRepository {
-  create(data: Prisma.GymCreateInput): Promise<Gym>
   findById(id: string): Promise<Gym | null>
-  searchMany(query: string, page: number): Promise<Array<Gym>>
-  fetchManyNearby(params: FetchManyNearby): Promise<Array<Gym>>
+  findManyNearby(params: FindManyNearbyParams): Promise<Gym[]>
+  searchMany(query: string, page: number): Promise<Gym[]>
+  create(data: Prisma.GymCreateInput): Promise<Gym>
 }

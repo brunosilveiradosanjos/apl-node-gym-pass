@@ -1,13 +1,13 @@
 import { GymsRepository } from '@/repositories/gyms-repository.interface'
 import { Gym } from '@prisma/client'
 
-export interface FetchNearbyGymsUseCaseRequest {
+interface FetchNearbyGymsUseCaseRequest {
   userLatitude: number
   userLongitude: number
 }
 
-export interface FetchNearbyGymsUseCaseResponse {
-  gyms: Array<Gym>
+interface FetchNearbyGymsUseCaseResponse {
+  gyms: Gym[]
 }
 
 export class FetchNearbyGymsUseCase {
@@ -17,10 +17,13 @@ export class FetchNearbyGymsUseCase {
     userLatitude,
     userLongitude,
   }: FetchNearbyGymsUseCaseRequest): Promise<FetchNearbyGymsUseCaseResponse> {
-    const gyms = await this.gymsRepository.fetchManyNearby({
-      userLatitude,
-      userLongitude,
+    const gyms = await this.gymsRepository.findManyNearby({
+      latitude: userLatitude,
+      longitude: userLongitude,
     })
-    return { gyms }
+
+    return {
+      gyms,
+    }
   }
 }
