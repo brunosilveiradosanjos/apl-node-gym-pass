@@ -1,5 +1,5 @@
 import { InvalidCredentialsError } from '@/use-cases/errors/invalid-credentials-error'
-import { makeAuthUseCase } from '@/use-cases/factories/make-auth-use-case'
+import { makeAuthenticateUseCase } from '@/use-cases/factories/make-authenticate-use-case'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
@@ -12,7 +12,7 @@ export async function auth(request: FastifyRequest, reply: FastifyReply) {
   const { email, password } = authBodySchema.parse(request.body)
 
   try {
-    const authUseCase = makeAuthUseCase()
+    const authUseCase = makeAuthenticateUseCase()
     const { user } = await authUseCase.execute({ email, password })
     const token = await reply.jwtSign(
       {},

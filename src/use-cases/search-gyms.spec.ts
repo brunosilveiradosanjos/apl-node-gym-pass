@@ -15,7 +15,7 @@ describe('Search Gyms Use Case', () => {
     await gymsRepository.create({
       title: 'JavaScript Gym',
       description: null,
-      phone: '',
+      phone: null,
       latitude: -27.2092052,
       longitude: -49.6401091,
     })
@@ -23,7 +23,7 @@ describe('Search Gyms Use Case', () => {
     await gymsRepository.create({
       title: 'TypeScript Gym',
       description: null,
-      phone: '',
+      phone: null,
       latitude: -27.2092052,
       longitude: -49.6401091,
     })
@@ -42,7 +42,7 @@ describe('Search Gyms Use Case', () => {
       await gymsRepository.create({
         title: `JavaScript Gym ${i}`,
         description: null,
-        phone: '',
+        phone: null,
         latitude: -27.2092052,
         longitude: -49.6401091,
       })

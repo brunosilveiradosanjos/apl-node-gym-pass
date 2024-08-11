@@ -1,17 +1,23 @@
-import { Prisma, CheckIn } from '@prisma/client'
-import { CheckInsRepository } from '../check-ins-repository.interface'
 import { prisma } from '@/lib/prisma'
+import { CheckInsRepository } from '@/repositories/check-ins-repository'
+import { CheckIn, Prisma } from '@prisma/client'
 import dayjs from 'dayjs'
 
 export class PrismaCheckInsRepository implements CheckInsRepository {
-  async create(data: Prisma.CheckInUncheckedCreateInput) {
-    const checkIn = await prisma.checkIn.create({ data })
+  async findById(id: string) {
+    const checkIn = await prisma.checkIn.findUnique({
+      where: {
+        id,
+      },
+    })
+
     return checkIn
   }
 
-  async findByUserInOnDate(userId: string, date: Date) {
+  async findByUserIdOnDate(userId: string, date: Date) {
     const startOfTheDay = dayjs(date).startOf('date')
     const endOfTheDay = dayjs(date).endOf('date')
+
     const checkIn = await prisma.checkIn.findFirst({
       where: {
         user_id: userId,
@@ -21,30 +27,48 @@ export class PrismaCheckInsRepository implements CheckInsRepository {
         },
       },
     })
+
     return checkIn
   }
 
   async findManyByUserId(userId: string, page: number) {
-    const checkIns = prisma.checkIn.findMany({
-      where: { user_id: userId },
-      take: 20,
+    const checkIns = await prisma.checkIn.findMany({
+      where: {
+        user_id: userId,
+      },
       skip: (page - 1) * 20,
+      take: 20,
     })
+
     return checkIns
   }
 
   async countByUserId(userId: string) {
-    const count = prisma.checkIn.count({ where: { id: userId } })
+    const count = await prisma.checkIn.count({
+      where: {
+        user_id: userId,
+      },
+    })
+
     return count
   }
 
-  async findById(id: string) {
-    const checkIn = await prisma.checkIn.findUnique({ where: { id } })
+  async create(data: Prisma.CheckInUncheckedCreateInput) {
+    const checkIn = await prisma.checkIn.create({
+      data,
+    })
+
     return checkIn
   }
 
   async save(data: CheckIn) {
-    const checkIn = prisma.checkIn.update({ where: { id: data.id }, data })
+    const checkIn = await prisma.checkIn.update({
+      where: {
+        id: data.id,
+      },
+      data,
+    })
+
     return checkIn
   }
 }

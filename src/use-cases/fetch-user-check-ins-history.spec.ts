@@ -1,5 +1,5 @@
 import { InMemoryCheckInsRepository } from '@/repositories/in-memory/in-memory-check-ins-repository'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { expect, describe, it, beforeEach } from 'vitest'
 import { FetchUserCheckInsHistoryUseCase } from './fetch-user-check-ins-history'
 
 let checkInsRepository: InMemoryCheckInsRepository
@@ -12,18 +12,18 @@ describe('Fetch User Check-in History Use Case', () => {
   })
 
   it('should be able to fetch check-in history', async () => {
-    const userId = 'user-01'
     await checkInsRepository.create({
-      user_id: userId,
       gym_id: 'gym-01',
+      user_id: 'user-01',
     })
+
     await checkInsRepository.create({
-      user_id: userId,
       gym_id: 'gym-02',
+      user_id: 'user-01',
     })
 
     const { checkIns } = await sut.execute({
-      userId,
+      userId: 'user-01',
       page: 1,
     })
 
@@ -34,17 +34,16 @@ describe('Fetch User Check-in History Use Case', () => {
     ])
   })
 
-  it('should be able to fetch paginated checki-in history', async () => {
-    const userId = 'user-01'
-    for (let index = 1; index <= 22; index++) {
+  it('should be able to fetch paginated check-in history', async () => {
+    for (let i = 1; i <= 22; i++) {
       await checkInsRepository.create({
-        user_id: userId,
-        gym_id: `gym-${index}`,
+        gym_id: `gym-${i}`,
+        user_id: 'user-01',
       })
     }
 
     const { checkIns } = await sut.execute({
-      userId,
+      userId: 'user-01',
       page: 2,
     })
 

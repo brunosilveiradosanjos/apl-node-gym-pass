@@ -1,16 +1,18 @@
-import { GymsRepository } from '@/repositories/gyms-repository.interface'
+import { GymsRepository } from '@/repositories/gyms-repository'
 import { Gym } from '@prisma/client'
 
 interface CreateGymUseCaseRequest {
   title: string
   description: string | null
-  phone: string
+  phone: string | null
   latitude: number
   longitude: number
 }
+
 interface CreateGymUseCaseResponse {
   gym: Gym
 }
+
 export class CreateGymUseCase {
   constructor(private gymsRepository: GymsRepository) {}
 
@@ -28,6 +30,9 @@ export class CreateGymUseCase {
       latitude,
       longitude,
     })
-    return { gym }
+
+    return {
+      gym,
+    }
   }
 }

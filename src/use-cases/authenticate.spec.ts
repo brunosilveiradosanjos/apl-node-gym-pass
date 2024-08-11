@@ -1,16 +1,16 @@
-import { expect, describe, it, beforeEach } from 'vitest'
-import { hash } from 'bcryptjs'
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
-import { AuthUseCase } from './auth'
-import { InvalidCredentialsError } from './errors/invalid-credentials-error'
+import { AuthenticateUseCase } from '@/use-cases/authenticate'
+import { InvalidCredentialsError } from '@/use-cases/errors/invalid-credentials-error'
+import { hash } from 'bcryptjs'
+import { expect, describe, it, beforeEach } from 'vitest'
 
 let usersRepository: InMemoryUsersRepository
-let authService: AuthUseCase
+let sut: AuthenticateUseCase
 
 describe('Authenticate Use Case', () => {
   beforeEach(() => {
     usersRepository = new InMemoryUsersRepository()
-    authService = new AuthUseCase(usersRepository)
+    sut = new AuthenticateUseCase(usersRepository)
   })
 
   it('should be able to authenticate', async () => {
@@ -20,7 +20,7 @@ describe('Authenticate Use Case', () => {
       password_hash: await hash('123456', 6),
     })
 
-    const { user } = await authService.execute({
+    const { user } = await sut.execute({
       email: 'johndoe@example.com',
       password: '123456',
     })
@@ -30,14 +30,14 @@ describe('Authenticate Use Case', () => {
 
   it('should not be able to authenticate with wrong email', async () => {
     await expect(() =>
-      authService.execute({
+      sut.execute({
         email: 'johndoe@example.com',
         password: '123456',
       }),
     ).rejects.toBeInstanceOf(InvalidCredentialsError)
   })
 
-  it('should not be able to authenticate with wrong password', async () => {
+  it('should not be able to authenticate with wrong email', async () => {
     await usersRepository.create({
       name: 'John Doe',
       email: 'johndoe@example.com',
@@ -45,9 +45,9 @@ describe('Authenticate Use Case', () => {
     })
 
     await expect(() =>
-      authService.execute({
+      sut.execute({
         email: 'johndoe@example.com',
-        password: '654321',
+        password: '123123',
       }),
     ).rejects.toBeInstanceOf(InvalidCredentialsError)
   })

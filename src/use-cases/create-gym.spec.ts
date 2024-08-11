@@ -1,31 +1,25 @@
-import request from 'supertest'
-import { app } from '@/app'
-import { afterAll, beforeAll, describe, expect, it } from 'vitest'
-import { createAndAuthenticateUser } from '@/utils/test/create-and-authenticate-user'
+import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-repository'
+import { expect, describe, it, beforeEach } from 'vitest'
+import { CreateGymUseCase } from './create-gym'
 
-describe('Create Gym (e2e)', () => {
-  beforeAll(async () => {
-    await app.ready()
+let gymsRepository: InMemoryGymsRepository
+let sut: CreateGymUseCase
+
+describe('Create Gym Use Case', () => {
+  beforeEach(() => {
+    gymsRepository = new InMemoryGymsRepository()
+    sut = new CreateGymUseCase(gymsRepository)
   })
 
-  afterAll(async () => {
-    await app.close()
-  })
+  it('should to create gym', async () => {
+    const { gym } = await sut.execute({
+      title: 'JavaScript Gym',
+      description: null,
+      phone: null,
+      latitude: -27.2092052,
+      longitude: -49.6401091,
+    })
 
-  it('should be able to create a gym', async () => {
-    const { token } = await createAndAuthenticateUser(app)
-
-    const response = await request(app.server)
-      .post('/gyms')
-      .set('Authorization', `Bearer ${token}`)
-      .send({
-        title: 'JavaScript Gym',
-        description: 'Some description.',
-        phone: '1199999999',
-        latitude: -27.2092052,
-        longitude: -49.6401091,
-      })
-
-    expect(response.statusCode).toEqual(201)
+    expect(gym.id).toEqual(expect.any(String))
   })
 })
