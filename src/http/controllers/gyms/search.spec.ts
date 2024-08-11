@@ -40,7 +40,7 @@ describe('Search Gyms (e2e)', () => {
     const response = await request(app.server)
       .get('/gyms/search')
       .query({
-        q: 'JavaScript',
+        query: 'JavaScript',
       })
       .set('Authorization', `Bearer ${token}`)
       .send()
