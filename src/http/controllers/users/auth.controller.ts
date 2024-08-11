@@ -13,7 +13,9 @@ export async function auth(request: FastifyRequest, reply: FastifyReply) {
 
   try {
     const authUseCase = makeAuthenticateUseCase()
+
     const { user } = await authUseCase.execute({ email, password })
+
     const token = await reply.jwtSign(
       {},
       {
@@ -22,7 +24,28 @@ export async function auth(request: FastifyRequest, reply: FastifyReply) {
         },
       },
     )
-    return reply.status(200).send({ token })
+
+    const refreshToken = await reply.jwtSign(
+      {},
+      {
+        sign: {
+          sub: user.id,
+          expiresIn: '7d', // User will lose auth after 7 days without make requests
+        },
+      },
+    )
+
+    return reply
+      .setCookie('refreshToken', refreshToken, {
+        path: '/',
+        secure: true, // This encrypts refresh for frontend
+        sameSite: true, // Access allowed only at same domain
+        httpOnly: true, // Only backend can access token, it doesnt save on cookie on frontend
+      })
+      .status(200)
+      .send({
+        token,
+      })
   } catch (error) {
     if (error instanceof InvalidCredentialsError) {
       return reply.status(400).send({ message: error.message })
