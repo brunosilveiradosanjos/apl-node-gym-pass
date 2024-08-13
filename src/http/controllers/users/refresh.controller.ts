@@ -6,7 +6,9 @@ export async function refresh(request: FastifyRequest, reply: FastifyReply) {
 
   // If youre here you have a refreshToken on your cookie
   const token = await reply.jwtSign(
-    {},
+    {
+      role: request.user.role,
+    },
     {
       sign: {
         sub: request.user.sub,
@@ -15,7 +17,9 @@ export async function refresh(request: FastifyRequest, reply: FastifyReply) {
   )
 
   const refreshToken = await reply.jwtSign(
-    {},
+    {
+      role: request.user.role,
+    },
     {
       sign: {
         sub: request.user.sub,
