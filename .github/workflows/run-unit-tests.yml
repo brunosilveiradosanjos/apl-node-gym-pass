@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Unit Tests CI
 
 on: [push]
 
@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js
+      - name: Unit Tests CI
         uses: actions/setup-node@v4
         with:
           node-version: 20
