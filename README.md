@@ -2,31 +2,34 @@
 
 GymPass style app
 
-## RFs (Requisitos funcionais)
+## FRs (Functional Requirements)
 
-- [x] Deve ser possível se cadastrar
-- [x] Deve ser possível se autenticar
-- [x] Deve ser possível obter o perfil de um usuário logado
-- [ ] Deve ser possível obter o número de chack-ins realizados pelo usuário logado
-- [ ] Deve ser possível o usuário obter seu histórico de check-ins
-- [ ] Deve ser possível o usuário buscar academias próximas
-- [ ] Deve ser possível o usuário buscar academias pelo nome
-- [ ] Deve ser possível o usuário realizar check-in em uma academia
-- [ ] Deve ser possível o validar o check-in de um usuário
-- [ ] Deve ser possível cadastrar uma academia
 
-## RNs (Regras de negócio)
+- [x]  It should be possible to register
+- [x]  It should be possible to authenticate
+- [x]  It should be possible to obtain the profile of a logged-in user
+- [x]  It should be possible to get the number of check-ins made by the logged-in user
+- [x]  It should be possible for the user to get their check-in history
+- [x]  It should be possible for the user to search for nearby gyms
+- [x]  It should be possible for the user to search for gyms by name
+- [x]  It should be possible for the user to check-in at a gym
+- [x]  It should be possible to validate a user's check-in
+- [x]  It should be possible to register a gym
 
-- [x] O usuário não deve poder se cadastrar com um e-mail duplicado
-- [ ] O usuário não pode fazer 2 check-ins no mesmo dia
-- [ ] O usuário não pode fazer check-in se não estiver perto (100m) da academia
-- [ ] O check-in só pode ser validado até 20 minutos após criado
-- [ ] O check-in só pode ser validado por administradores
-- [ ] O check-in só pode ser cadastrada por administradores
+## BRs (Business Rules)
 
-## RNFs (Requisitos não-funcionais)
 
-- [x] A senha do usuário precisa estar criptografada
-- [x] Os dados da aplicação precisam estar persistidos em um banco PostgreeSQL
-- [ ] Todas listas de dados precisam estar paginadas com 20 itens por página
-- [ ] O usuário deve ser identificado por um JWT
+- [x] A user should not be able to register with a duplicate email
+- [x] A user cannot perform two check-ins on the same day
+- [x] A user cannot check-in if they are not close (100m) to the gym
+- [x] Check-ins can only be validated up to 20 minutes after being created
+- [x] Check-ins can only be validated by administrators
+- [x] Gyms can only be registered by administrators
+
+## NFRs (Non-functional Requirements)
+
+
+- [x] The user's password needs to be encrypted
+- [x] The application data needs to be stored in a PostgreSQL database
+- [x] All data lists need to be paginated with 20 items per page
+- [x] The user must be identified by a JWT
