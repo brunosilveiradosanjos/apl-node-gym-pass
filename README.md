@@ -2,9 +2,8 @@
 
 GymPass style app
 
+
 ## FRs (Functional Requirements)
-
-
 - [x]  It should be possible to register
 - [x]  It should be possible to authenticate
 - [x]  It should be possible to obtain the profile of a logged-in user
@@ -16,9 +15,8 @@ GymPass style app
 - [x]  It should be possible to validate a user's check-in
 - [x]  It should be possible to register a gym
 
+
 ## BRs (Business Rules)
-
-
 - [x] A user should not be able to register with a duplicate email
 - [x] A user cannot perform two check-ins on the same day
 - [x] A user cannot check-in if they are not close (100m) to the gym
@@ -26,9 +24,8 @@ GymPass style app
 - [x] Check-ins can only be validated by administrators
 - [x] Gyms can only be registered by administrators
 
+
 ## NFRs (Non-functional Requirements)
-
-
 - [x] The user's password needs to be encrypted
 - [x] The application data needs to be stored in a PostgreSQL database
 - [x] All data lists need to be paginated with 20 items per page
